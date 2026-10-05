@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<!-- TakeYouForward standalone page -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TakeYouForward — Meipuratchi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./TakeYouForward — Meipuratchi_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="./TakeYouForward — Meipuratchi_files/all.min.css">
+  <style>
+    /* ── CSS Variables (matches index.css) ── */
+    :root {
+      --primary: #192441;
+      --primary-light: #2a3a6b;
+      --accent: #f5a623;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --success: #28a745;
+      --white: #ffffff;
+      --shadow: 0 10px 40px rgba(25,36,65,0.12);
+      --shadow-hover: 0 20px 60px rgba(25,36,65,0.2);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Poppins',sans-serif; background:#f5f7fa; color:var(--dark); overflow-x:hidden; }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:3px; }
+    .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .section-pad { padding:80px 0; }
+    .text-center { text-align:center; }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:14px 32px; border-radius:50px; font-size:1rem;
+      font-weight:600; cursor:pointer; border:none;
+      transition:var(--transition); text-decoration:none;
+      font-family:'Poppins',sans-serif;
+    }
+    .btn-primary { background:var(--primary); color:#fff; }
+    .btn-primary:hover { background:var(--primary-light); transform:translateY(-2px); box-shadow:0 8px 25px rgba(25,36,65,0.3); }
+    .btn-accent { background:var(--accent); color:#fff; }
+    .btn-accent:hover { background:#e0941a; transform:translateY(-2px); box-shadow:0 8px 25px rgba(245,166,35,0.4); }
+    .btn-outline { background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.6); }
+    .btn-outline:hover { background:rgba(255,255,255,0.15); }
+
+    /* ── Navbar (stub) ── */
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(25,36,65,0.95); backdrop-filter:blur(12px);
+      padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .navbar .container { display:flex; align-items:center; justify-content:space-between; }
+    .navbar-brand { color:#fff; font-size:1.3rem; font-weight:800; text-decoration:none; }
+    .navbar-brand span { color:var(--accent); }
+    .navbar-links { display:flex; gap:28px; list-style:none; }
+    .navbar-links a { color:rgba(255,255,255,0.75); text-decoration:none; font-size:0.9rem; font-weight:500; transition:color 0.2s; }
+    .navbar-links a:hover, .navbar-links a.active { color:var(--accent); }
+
+    /* ── Hero ── */
+    .tyf-hero {
+      min-height:85vh; padding:140px 0 80px;
+      background:linear-gradient(135deg, #192441 0%, #1a3a6e 55%, #0d1b35 100%);
+      position:relative; display:flex; align-items:center; overflow:hidden;
+    }
+    
+    @keyframes floatUp {
+      0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+      100% { transform:translateY(-110vh) rotate(720deg); opacity:0; }
+    }
+    .tyf-hero .container { position:relative; z-index:2; color:#fff; max-width:860px; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(245,166,35,0.18); border:1px solid rgba(245,166,35,0.4);
+      color:var(--accent); padding:8px 20px; border-radius:50px;
+      font-size:0.85rem; font-weight:600; margin-bottom:24px;
+      backdrop-filter:blur(10px);
+    }
+    .tyf-hero h1 { font-size:3.8rem; font-weight:800; line-height:1.1; margin-bottom:16px; }
+    .tyf-hero h1 span { display:block; font-size:1.6rem; font-weight:400; color:rgba(255,255,255,0.75); margin-top:8px; }
+    .tyf-hero p { font-size:1.05rem; opacity:0.82; line-height:1.8; margin-bottom:36px; max-width:640px; }
+
+    .hero-actions { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:48px; }
+    .hero-stats { display:flex; gap:40px; flex-wrap:wrap; }
+    .hero-stat span { display:block; font-size:2rem; font-weight:800; color:var(--accent); }
+    .hero-stat p { font-size:0.82rem; opacity:0.7; }
+
+    /* ── Search Bar ── */
+    .search-section { background:#fff; padding:40px 0; box-shadow:0 4px 20px rgba(25,36,65,0.08); }
+    .search-wrapper { position:relative; max-width:720px; margin:0 auto; }
+    .search-wrapper i.search-icon {
+      position:absolute; left:22px; top:50%; transform:translateY(-50%);
+      color:var(--gray); font-size:1.1rem; pointer-events:none;
+    }
+    .search-input {
+      width:100%; padding:18px 60px 18px 54px;
+      border:2px solid #e0e7ef; border-radius:50px;
+      font-size:1rem; font-family:'Poppins',sans-serif;
+      background:#f8fafc; outline:none;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input:focus { border-color:var(--primary); background:#fff; box-shadow:0 0 0 4px rgba(25,36,65,0.08); }
+    .search-clear {
+      position:absolute; right:18px; top:50%; transform:translateY(-50%);
+      background:none; border:none; cursor:pointer; color:var(--gray);
+      font-size:1rem; display:none;
+    }
+    .search-pills { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; justify-content:center; }
+    .pill {
+      background:#eef2ff; color:var(--primary); padding:6px 16px;
+      border-radius:50px; font-size:0.78rem; font-weight:600;
+      cursor:pointer; border:1px solid transparent; transition:var(--transition);
+    }
+    .pill:hover, .pill.active { background:var(--primary); color:#fff; }
+
+    /* ── Tab Filters ── */
+    .tabs-section { background:#f5f7fa; padding:32px 0 0; }
+    .tabs { display:flex; gap:0; overflow-x:auto; border-bottom:2px solid #e0e7ef; }
+    .tab-btn {
+      display:flex; align-items:center; gap:8px;
+      padding:14px 24px; font-family:'Poppins',sans-serif;
+      font-size:0.88rem; font-weight:600; color:var(--gray);
+      background:none; border:none; border-bottom:3px solid transparent;
+      margin-bottom:-2px; cursor:pointer; white-space:nowrap;
+      transition:var(--transition);
+    }
+    .tab-btn:hover { color:var(--primary); }
+    .tab-btn.active { color:var(--primary); border-bottom-color:var(--accent); background:#fff; border-radius:8px 8px 0 0; }
+    .tab-btn .tab-count {
+      background:var(--accent); color:#fff;
+      font-size:0.7rem; padding:2px 7px; border-radius:20px; font-weight:700;
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(25,36,65,0.07); color:var(--primary);
+      padding:6px 16px; border-radius:50px; font-size:0.78rem;
+      font-weight:700; text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:14px;
+    }
+    .section-title { font-size:2rem; font-weight:700; color:var(--primary); margin-bottom:10px; }
+    .section-title span { color:var(--accent); }
+    .section-subtitle { color:var(--gray); font-size:0.95rem; margin-bottom:36px; line-height:1.7; }
+
+    /* ── Category Row ── */
+    .category-row { padding:56px 0 32px; }
+    .category-row + .category-row { padding-top:0; }
+    .category-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+    .category-title {
+      display:flex; align-items:center; gap:12px;
+      font-size:1.2rem; font-weight:700; color:var(--primary);
+    }
+    .category-title .cat-icon {
+      width:40px; height:40px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:1rem; flex-shrink:0;
+    }
+    .see-all { color:var(--primary); font-weight:600; font-size:0.85rem; text-decoration:none; display:flex; align-items:center; gap:4px; }
+    .see-all:hover { color:var(--accent); }
+
+    /* ── Cards ── */
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+
+    .tyf-card {
+      background:#fff; border-radius:var(--radius); overflow:hidden;
+      box-shadow:var(--shadow); transition:var(--transition); cursor:pointer;
+      display:flex; flex-direction:column;
+    }
+    .tyf-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-hover); }
+
+    .card-header-band { height:6px; }
+    .band-tn    { background:linear-gradient(90deg,#192441,#2a3a6b); }
+    .band-india { background:linear-gradient(90deg,#ff9933,#128807); }
+    .band-global{ background:linear-gradient(90deg,#2196F3,#21cbf3); }
+    .band-comp  { background:linear-gradient(90deg,#8e24aa,#e91e63); }
+    .band-entrance { background:linear-gradient(90deg,#e65100,#f5a623); }
+
+    .card-body { padding:20px 20px 16px; flex:1; display:flex; flex-direction:column; }
+    .card-type-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:0.68rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.06em; padding:4px 10px; border-radius:20px;
+      margin-bottom:12px; width:fit-content;
+    }
+    .badge-course    { background:#e8f4fd; color:#1565c0; }
+    .badge-compexam  { background:#f3e5f5; color:#6a1b9a; }
+    .badge-entrance  { background:#fff3e0; color:#e65100; }
+
+    .card-body h3 { font-size:1rem; font-weight:700; color:var(--primary); margin-bottom:6px; line-height:1.4; }
+    .card-body p.card-desc { font-size:0.82rem; color:var(--gray); line-height:1.6; margin-bottom:14px; flex:1; }
+
+    .card-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+    .meta-chip {
+      display:inline-flex; align-items:center; gap:5px;
+      background:#f0f3f8; color:#455a78; font-size:0.74rem;
+      font-weight:600; padding:4px 10px; border-radius:6px;
+    }
+
+    .card-footer {
+      padding:12px 20px; border-top:1px solid #f0f3f8;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .card-region { font-size:0.75rem; color:var(--gray); display:flex; align-items:center; gap:5px; }
+    .card-cta {
+      background:var(--primary); color:#fff; border:none; cursor:pointer;
+      padding:7px 16px; border-radius:6px; font-size:0.78rem; font-weight:600;
+      font-family:'Poppins',sans-serif; transition:background 0.2s;
+    }
+    .card-cta:hover { background:var(--primary-light); }
+
+    /* ── Featured / Spotlight ── */
+    .spotlight-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
+    .spotlight-card {
+      background:linear-gradient(135deg,var(--primary) 0%,#1a3a6e 100%);
+      border-radius:var(--radius); padding:28px;
+      color:#fff; cursor:pointer; transition:var(--transition);
+      display:flex; flex-direction:column; gap:14px;
+      position:relative; overflow:hidden;
+    }
+    .spotlight-card::before {
+      content:''; position:absolute; top:-40%; right:-20%;
+      width:280px; height:280px; border-radius:50%;
+      background:rgba(255,255,255,0.05);
+    }
+    .spotlight-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(25,36,65,0.35); }
+    .spotlight-card .sp-badge {
+      background:rgba(245,166,35,0.25); color:var(--accent);
+      border:1px solid rgba(245,166,35,0.4); font-size:0.72rem; font-weight:700;
+      padding:4px 12px; border-radius:20px; width:fit-content;
+    }
+    .spotlight-card h3 { font-size:1.3rem; font-weight:700; line-height:1.3; }
+    .spotlight-card p { font-size:0.85rem; opacity:0.8; line-height:1.6; }
+    .spotlight-meta { display:flex; gap:16px; flex-wrap:wrap; }
+    .sp-chip { font-size:0.75rem; opacity:0.75; display:flex; align-items:center; gap:5px; }
+    .spotlight-card .sp-btn {
+      background:var(--accent); color:#fff; border:none; cursor:pointer;
+      padding:10px 20px; border-radius:8px; font-size:0.85rem; font-weight:700;
+      font-family:'Poppins',sans-serif; transition:background 0.2s; width:fit-content;
+    }
+    .spotlight-card .sp-btn:hover { background:#e0941a; }
+
+    /* ── States: Loading / Empty / Error ── */
+    .state-box {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:60px 24px; text-align:center; gap:16px;
+    }
+    .state-icon { font-size:3.5rem; }
+    .state-box h3 { font-size:1.2rem; color:var(--primary); font-weight:700; }
+    .state-box p  { color:var(--gray); font-size:0.9rem; max-width:360px; line-height:1.6; }
+    .state-box .btn { margin-top:8px; }
+
+    .skeleton-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+    .skeleton-card {
+      background:#fff; border-radius:var(--radius); overflow:hidden;
+      box-shadow:var(--shadow); height:220px;
+    }
+    .skeleton-band { height:6px; background:#e9edf3; }
+    .skeleton-body { padding:20px; display:flex; flex-direction:column; gap:10px; }
+    .skeleton-line {
+      height:12px; border-radius:6px; background:#e9edf3;
+      animation:shimmer 1.4s ease-in-out infinite;
+    }
+    .skeleton-line.w-40 { width:40%; }
+    .skeleton-line.w-70 { width:70%; }
+    .skeleton-line.w-90 { width:90%; }
+    .skeleton-line.w-55 { width:55%; }
+    @keyframes shimmer {
+      0%,100% { opacity:1; } 50% { opacity:0.4; }
+    }
+
+    /* ── Search Result Header ── */
+    .results-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 0 8px; flex-wrap:wrap; gap:12px;
+    }
+    .results-header h2 { font-size:1.1rem; color:var(--primary); font-weight:700; }
+    .results-header span { color:var(--gray); font-size:0.85rem; }
+    .result-type-tag {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:0.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.05em; padding:3px 9px; border-radius:5px;
+      vertical-align:middle;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background:linear-gradient(135deg,var(--primary) 0%,#1a3a6e 100%);
+      padding:72px 0; color:#fff; text-align:center; position:relative; overflow:hidden;
+    }
+    .cta-banner::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 60% 50%,rgba(245,166,35,0.12) 0%,transparent 70%);
+    }
+    .cta-banner .container { position:relative; z-index:1; }
+    .cta-banner h2 { font-size:2.3rem; margin-bottom:14px; }
+    .cta-banner p  { opacity:0.8; font-size:1rem; margin-bottom:32px; max-width:540px; margin-left:auto; margin-right:auto; }
+    .cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+    /* ── Footer stub ── */
+    .footer { background:var(--primary); color:rgba(255,255,255,0.6); text-align:center; padding:24px; font-size:0.82rem; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      z-index:200; display:none; align-items:center; justify-content:center; padding:20px;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal {
+      background:#fff; border-radius:var(--radius); max-width:560px; width:100%;
+      max-height:90vh; overflow-y:auto; padding:36px; position:relative;
+      animation:modalIn 0.25s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(0.92) translateY(20px); } to { opacity:1; transform:none; } }
+    .modal-close {
+      position:absolute; top:16px; right:16px;
+      background:none; border:none; cursor:pointer; font-size:1.2rem; color:var(--gray);
+    }
+    .modal h2 { font-size:1.4rem; color:var(--primary); margin-bottom:8px; }
+    .modal .modal-type { margin-bottom:18px; }
+    .modal p { color:var(--gray); line-height:1.7; font-size:0.9rem; margin-bottom:12px; }
+    .modal-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+    .modal-chip {
+      background:#f0f3f8; color:#455a78; font-size:0.78rem; font-weight:600;
+      padding:6px 14px; border-radius:8px; display:flex; align-items:center; gap:6px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width:900px) {
+      .tyf-hero h1 { font-size:2.6rem; }
+      .hero-stats  { gap:24px; }
+      .spotlight-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .tyf-hero h1 { font-size:2rem; }
+      .tyf-hero h1 span { font-size:1rem; }
+      .tyf-hero p  { font-size:0.9rem; }
+      .hero-actions { flex-direction:column; }
+      .hero-actions .btn { width:100%; justify-content:center; }
+      .hero-stats { gap:20px; }
+      .tabs { gap:0; }
+      .tab-btn { padding:12px 14px; font-size:0.8rem; }
+      .section-title { font-size:1.5rem; }
+      .cards-grid { grid-template-columns:1fr; }
+      .cta-banner h2 { font-size:1.6rem; }
+      .cta-actions { flex-direction:column; align-items:center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  
+<!-- ═══════════════════════════════════════════════ NAVBAR ══ -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">மெய் <span>புரட்சி</span></a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="engineering.html">Engineering</a></li>
+      <li><a href="TakeYouForward.html" class="active">TakeYouForward</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ HERO ══ -->
+<section class="tyf-hero">
+  <div class="tyf-hero-particles" id="particles"></div>
+  <div class="container">
+    <div class="hero-badge">
+      <i class="fa-solid fa-rocket"></i>
+      Your Centralized Course &amp; Exam Discovery Platform
+    </div>
+    <h1>
+      TakeYouForward
+      <span>கல்வி வாய்ப்புகளை கண்டறியுங்கள் — Discover Educational Opportunities</span>
+    </h1>
+    <p>
+      Explore courses across Tamil Nadu, India, and the globe. Find competitive exams,
+      entrance exams, and career-defining opportunities — all in one place.
+    </p>
+    <div class="hero-actions">
+      <a href="takeyouforward.html#search" class="btn btn-accent">
+        <i class="fa-solid fa-magnifying-glass"></i> Start Searching
+      </a>
+      <a href="tamil_nadu/ug-course-tamilnadu.html" class="btn btn-outline">
+        <i class="fa-solid fa-book-open"></i> Browse Courses
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span>200+</span><p>Courses Listed</p></div>
+      <div class="hero-stat"><span>80+</span><p>Competitive Exams</p></div>
+      <div class="hero-stat"><span>50+</span><p>Entrance Exams</p></div>
+      <div class="hero-stat"><span>3</span><p>Regions Covered</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SEARCH ══ -->
+<section class="search-section" id="search">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:20px;">
+      <div class="section-label"><i class="fa-solid fa-magnifying-glass"></i> Search</div>
+      <h2 class="section-title">Find Courses &amp; <span>Exams</span></h2>
+      <p class="section-subtitle" style="margin-bottom:20px;">
+        Search by name, keyword, category, or exam type
+      </p>
+    </div>
+    <div class="search-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Try: NEET, UPSC, MBA, JEE, Computer Science, TNPSC…" autocomplete="off">
+      <button class="search-clear" id="searchClear" title="Clear">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="search-pills">
+      <span class="pill" onclick="doSearch(&#39;Engineering&#39;)">Engineering</span>
+      <span class="pill" onclick="doSearch(&#39;NEET&#39;)">NEET</span>
+      <span class="pill" onclick="doSearch(&#39;TNPSC&#39;)">TNPSC</span>
+      <span class="pill" onclick="doSearch(&#39;UPSC&#39;)">UPSC</span>
+      <span class="pill" onclick="doSearch(&#39;MBA&#39;)">MBA</span>
+      <span class="pill" onclick="doSearch(&#39;JEE&#39;)">JEE</span>
+      <span class="pill" onclick="doSearch(&#39;Medical&#39;)">Medical</span>
+      <span class="pill" onclick="doSearch(&#39;Computer Science&#39;)">Computer Science</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ TABS ══ -->
+<div class="tabs-section" id="courses">
+  <div class="container">
+    <div class="tabs" id="tabBar">
+      <button class="tab-btn active" data-tab="all">
+        <i class="fa-solid fa-th"></i> All <span class="tab-count" id="cnt-all">7</span>
+      </button>
+      <button class="tab-btn" data-tab="tn-courses">
+        <i class="fa-solid fa-map-marker-alt"></i> TN Courses <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="india-courses">
+        <i class="fa-solid fa-flag"></i> India Courses <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="global-courses">
+        <i class="fa-solid fa-globe"></i> Global Courses <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="comp-tn">
+        <i class="fa-solid fa-trophy"></i> TN Competitive <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="comp-india">
+        <i class="fa-solid fa-medal"></i> India Competitive <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="entrance-tn">
+        <i class="fa-solid fa-door-open"></i> TN Entrance <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="entrance-india">
+        <i class="fa-solid fa-door-open"></i> India Entrance <span class="tab-count">1</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ MAIN CONTENT ══ -->
+<main id="mainContent">
+
+  <!-- Loading State (shown initially) -->
+  <div id="stateLoading" class="container">
+    <div class="skeleton-grid" style="padding:40px 0;">
+      <div class="skeleton-card"><div class="skeleton-band"></div><div class="skeleton-body"><div class="skeleton-line w-40"></div><div class="skeleton-line w-70"></div><div class="skeleton-line w-90"></div><div class="skeleton-line w-55"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-band"></div><div class="skeleton-body"><div class="skeleton-line w-40"></div><div class="skeleton-line w-70"></div><div class="skeleton-line w-90"></div><div class="skeleton-line w-55"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-band"></div><div class="skeleton-body"><div class="skeleton-line w-40"></div><div class="skeleton-line w-70"></div><div class="skeleton-line w-90"></div><div class="skeleton-line w-55"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-band"></div><div class="skeleton-body"><div class="skeleton-line w-40"></div><div class="skeleton-line w-70"></div><div class="skeleton-line w-90"></div><div class="skeleton-line w-55"></div></div></div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div id="stateError" class="container" style="display:none;">
+    <div class="state-box">
+      <div class="state-icon">⚠️</div>
+      <h3>Something went wrong</h3>
+      <p>We couldn't load the data right now. Please check your connection and try again.</p>
+      <button class="btn btn-primary" onclick="loadData()">
+        <i class="fa-solid fa-rotate-right"></i> Retry
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div id="stateEmpty" class="container" style="display:none;">
+    <div class="state-box">
+      <div class="state-icon">🔍</div>
+      <h3>No results found</h3>
+      <p>We couldn't find anything matching <strong id="emptyQuery"></strong>. Try a different keyword or browse by category.</p>
+      <button class="btn btn-primary" onclick="clearSearch()">
+        <i class="fa-solid fa-xmark"></i> Clear Search
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div id="stateResults" class="container" style="display:none; padding:40px 0;">
+    <div class="results-header">
+      <h2>Search results for "<span id="resultsQuery"></span>"</h2>
+      <span id="resultsCount"></span>
+    </div>
+    <div class="cards-grid" id="resultsGrid"></div>
+  </div>
+
+  <!-- ── Full Browsing View ── -->
+  <div id="stateData" style="display:none;">
+
+    <!-- ── Seven category containers ── -->
+    <section class="section-pad" style="background:#f7f8fc;">
+      <div class="container">
+        <div class="section-label"><i class="fa-solid fa-compass"></i> Explore</div>
+        <h2 class="section-title">Find Your <span>Path</span></h2>
+        <p class="section-subtitle">Choose a category to explore courses and examinations.</p>
+        <div class="cards-grid" id="categoryCards">
+          <a href="tamil_nadu/ug-course-tamilnadu.html" class="tyf-card category-card" data-category="tn-courses" data-search="ug course tamil nadu tn courses medical engineering law agriculture btech be bsc ba bl information technology computer science">
+            <div class="card-header-band band-tn"></div><div class="card-body">
+              <span class="card-type-badge badge-course">🎓 Courses</span><h3>UG COURSE IN TAMIL NADU</h3>
+              <p class="card-desc">Explore undergraduate programmes in medical, engineering, law, agriculture and more across Tamil Nadu.</p>
+              <div class="card-meta"><span class="meta-chip">🩺 Medical</span><span class="meta-chip">💻 Engineering</span><span class="meta-chip">⚖️ BA / B.L.</span><span class="meta-chip">🌾 Agriculture</span></div>
+            </div><div class="card-footer"><span class="card-region">Tamil Nadu</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+          <a href="india/india_ugcourse.html" class="tyf-card category-card" data-category="india-courses" data-search="ug course india indian courses medical engineering law agriculture btech be bsc ba bl information technology computer science">
+            <div class="card-header-band band-india"></div><div class="card-body">
+              <span class="card-type-badge badge-course">🇮🇳 Courses</span><h3>UG COURSE IN INDIA</h3>
+              <p class="card-desc">Explore undergraduate degree programmes from universities and institutions across India.</p>
+              <div class="card-meta"><span class="meta-chip">🩺 Medical</span><span class="meta-chip">💻 Engineering</span><span class="meta-chip">⚖️ BA / B.L.</span><span class="meta-chip">🌾 Agriculture</span></div>
+            </div><div class="card-footer"><span class="card-region">India</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+          <a href="global/global-course.html" class="tyf-card category-card" data-category="global-courses" data-search="global worldwide international global courses ug degree undergraduate btech be bsc ba">
+            <div class="card-header-band band-global"></div><div class="card-body">
+              <span class="card-type-badge badge-course">🌍 Courses</span><h3>GLOBAL COURSES</h3>
+              <p class="card-desc">Explore undergraduate courses and degree programmes from universities around the world.</p>
+              <div class="card-meta"><span class="meta-chip">🌍 Worldwide</span><span class="meta-chip">🎓 UG Courses</span><span class="meta-chip">More ...</span></div>
+            </div><div class="card-footer"><span class="card-region">Global</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+          <a href="tamil_nadu/tn_exam.html" class="tyf-card category-card" data-category="comp-tn" data-search="tn competitive competitive exam tamil nadu tnpsc tnusrb trb mrb tangedco government exam">
+            <div class="card-header-band band-comp"></div><div class="card-body">
+              <span class="card-type-badge badge-compexam">🏛️ Competitive Exams</span><h3>TN COMPETITIVE</h3>
+              <p class="card-desc">Explore Tamil Nadu government and competitive examinations.</p>
+              <div class="card-meta"><span class="meta-chip">TNPSC</span><span class="meta-chip">TNUSRB</span><span class="meta-chip">TRB</span><span class="meta-chip">More Exams</span></div>
+            </div><div class="card-footer"><span class="card-region">Tamil Nadu</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+          <a href="india/india_exam.html" class="tyf-card category-card" data-category="comp-india" data-search="india competitive competitive exam upsc ssc banking railway government exam civil services">
+            <div class="card-header-band band-comp"></div><div class="card-body">
+              <span class="card-type-badge badge-compexam">🇮🇳 Competitive Exams</span><h3>INDIA COMPETITIVE</h3>
+              <p class="card-desc">Explore major competitive examinations conducted across India.</p>
+              <div class="card-meta"><span class="meta-chip">UPSC</span><span class="meta-chip">SSC</span><span class="meta-chip">Banking</span><span class="meta-chip">Railway</span></div>
+            </div><div class="card-footer"><span class="card-region">India</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+          <a href="tamil_nadu/tn-ug-entrance.html" class="tyf-card category-card" data-category="entrance-tn" data-search="tn entrance entrance exam tamil nadu tnea tancet neet admission counselling engineering medical">
+            <div class="card-header-band band-entrance"></div><div class="card-body">
+              <span class="card-type-badge badge-entrance">🎓 Entrance Exams</span><h3>TN ENTRANCE <small style="font-size:.65em;opacity:.7;">30+</small></h3>
+              <p class="card-desc">Explore entrance examinations and admission opportunities for students in Tamil Nadu.</p>
+              <div class="card-meta"><span class="meta-chip">TNEA</span><span class="meta-chip">TANCET</span><span class="meta-chip">More Exams</span></div>
+            </div><div class="card-footer"><span class="card-region">Tamil Nadu</span><span class="card-cta">Explore →</span></div>
+          </a>
+
+
+          <a href="india/entranceexam_std.html" class="tyf-card category-card" data-category="entrance-india" data-search="india entrance entrance exam jee neet cuet cat clat nata national admission higher education">
+            <div class="card-header-band band-entrance"></div><div class="card-body">
+              <span class="card-type-badge badge-entrance">🎓 Entrance Exams</span><h3>INDIA ENTRANCE <small style="font-size:.65em;opacity:.7;">70+</small></h3>
+              <p class="card-desc">Explore national-level entrance examinations for higher education across India.</p>
+              <div class="card-meta"><span class="meta-chip">JEE</span><span class="meta-chip">NEET</span><span class="meta-chip">CUET</span><span class="meta-chip">More Exams</span></div>
+            </div><div class="card-footer"><span class="card-region">India</span><span class="card-cta">Explore →</span></div>
+          </a>
+        </div>
+        <div id="categoryEmpty" class="state-box" style="display:none;"><div class="state-icon">🔍</div><h3>No category found</h3><p>Try another course, exam or keyword.</p></div>
+      </div>
+    </section>
+
+    <!-- The home page intentionally contains only the seven category containers. -->
+  </div><!-- end stateData -->
+
+</main>
+
+<!-- ═══════════════════════════════════════════════ CTA BANNER ══ -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Shape Your Future?</h2>
+    <p>Thousands of Tamil Nadu students have discovered their path with Meipuratchi. Your journey starts here.</p>
+    <div class="cta-actions">
+      <a href="register.html" class="btn btn-accent"><i class="fa-solid fa-graduation-cap"></i> Register Free</a>
+      <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  © 2025 Meipuratchi — மெய் புரட்சி. All rights reserved.
+</footer>
+
+<!-- ═══════════════════════════════════════════════ MODAL ══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModalDirect()"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SCRIPT ══ -->
+<script>
+/* ─── Dummy Data ─────────────────────────────────────────── */
+const DATA = {
+  "tn-courses": [
+    { id:'tnc1', name:'B.E. / B.Tech (Engineering)', type:'course', region:'Tamil Nadu', duration:'4 Years', desc:'Bachelor of Engineering across various disciplines offered by Anna University affiliated colleges.', tags:['Engineering','Science','Technology'], band:'band-tn' },
+    { id:'tnc2', name:'MBBS (Medical)', type:'course', region:'Tamil Nadu', duration:'5.5 Years', desc:'Bachelor of Medicine and Bachelor of Surgery through Tamil Nadu Dr. MGR Medical University.', tags:['Medical','Health','Science'], band:'band-tn' },
+    { id:'tnc3', name:'B.Sc Agriculture', type:'course', region:'Tamil Nadu', duration:'4 Years', desc:'Agricultural science programme offered by Tamil Nadu Agricultural University (TNAU).', tags:['Agriculture','Science'], band:'band-tn' },
+    { id:'tnc4', name:'B.Com (Commerce)', type:'course', region:'Tamil Nadu', duration:'3 Years', desc:'Bachelor of Commerce covering accounting, taxation, finance and business management.', tags:['Commerce','Business'], band:'band-tn' },
+    { id:'tnc5', name:'B.A. Tamil Literature', type:'course', region:'Tamil Nadu', duration:'3 Years', desc:'Undergraduate study of Tamil language, poetry, classical literature and linguistics.', tags:['Arts','Tamil','Literature'], band:'band-tn' },
+    { id:'tnc6', name:'Diploma in Nursing (GNM)', type:'course', region:'Tamil Nadu', duration:'3 Years', desc:'General Nursing and Midwifery diploma for government nursing colleges in Tamil Nadu.', tags:['Nursing','Health','Medical'], band:'band-tn' },
+  ],
+  "india-courses": [
+    { id:'inc1', name:'B.Tech IIT (JEE Advanced)', type:'course', region:'India', duration:'4 Years', desc:'Flagship engineering programme at Indian Institutes of Technology — top global engineering schools.', tags:['Engineering','IIT','Technology'], band:'band-india' },
+    { id:'inc2', name:'MBBS AIIMS', type:'course', region:'India', duration:'5.5 Years', desc:'Medical degree from All India Institute of Medical Sciences — India\'s most prestigious medical institution.', tags:['Medical','AIIMS','Health'], band:'band-india' },
+    { id:'inc3', name:'MBA (IIM)', type:'course', region:'India', duration:'2 Years', desc:'Master of Business Administration from Indian Institutes of Management via CAT entrance.', tags:['MBA','Management','Business'], band:'band-india' },
+    { id:'inc4', name:'B.Sc (Hons) Computer Science', type:'course', region:'India', duration:'3 Years', desc:'Undergraduate CS programme covering algorithms, AI, data structures and software engineering.', tags:['Computer Science','IT','Technology'], band:'band-india' },
+    { id:'inc5', name:'LLB (Law)', type:'course', region:'India', duration:'3 / 5 Years', desc:'Bachelor of Laws — CLAT-based admission to National Law Universities across India.', tags:['Law','Legal'], band:'band-india' },
+    { id:'inc6', name:'B.Des (Design)', type:'course', region:'India', duration:'4 Years', desc:'Bachelor of Design offered at NID, NIFT and IIT design schools via UCEED/NID-DAT.', tags:['Design','Arts','Creative'], band:'band-india' },
+  ],
+  "global-courses": [
+    { id:'glc1', name:'BSc Computer Science (MIT)', type:'course', region:'Global', duration:'4 Years', desc:'World-renowned computer science programme at Massachusetts Institute of Technology.', tags:['Computer Science','USA','Technology'], band:'band-global' },
+    { id:'glc2', name:'MBA (Harvard Business School)', type:'course', region:'Global', duration:'2 Years', desc:'MBA from Harvard — consistently ranked among the world\'s top business programmes.', tags:['MBA','USA','Business'], band:'band-global' },
+    { id:'glc3', name:'MSc Data Science (Oxford)', type:'course', region:'Global', duration:'1 Year', desc:'Intensive data science postgraduate programme at the University of Oxford, UK.', tags:['Data Science','UK','Technology'], band:'band-global' },
+    { id:'glc4', name:'BEng Aerospace (Imperial College)', type:'course', region:'Global', duration:'4 Years', desc:'Engineering programme with a focus on aeronautics and astronautics at Imperial College London.', tags:['Aerospace','Engineering','UK'], band:'band-global' },
+    { id:'glc5', name:'MBBS (Germany — Free Tuition)', type:'course', region:'Global', duration:'6 Years', desc:'Medical degree from German public universities — tuition-free for international students.', tags:['Medical','Germany','Affordable'], band:'band-global' },
+  ],
+  "comp-tn": [
+    { id:'ctn1', name:'TNPSC Group I', type:'compexam', region:'Tamil Nadu', duration:'Multi-stage', desc:'Tamil Nadu Public Service Commission Group I exam for Class-I gazetted officer posts.', tags:['Government','TNPSC','Civil Service'], band:'band-comp' },
+    { id:'ctn2', name:'TNPSC Group II / IIA', type:'compexam', region:'Tamil Nadu', duration:'1–2 Days', desc:'TNPSC Group II for Sub-Inspector, Deputy Commercial Tax Officer and other posts.', tags:['Government','TNPSC'], band:'band-comp' },
+    { id:'ctn3', name:'TNPSC Group IV / VAO', type:'compexam', region:'Tamil Nadu', duration:'1 Day', desc:'Village Administrative Officer and other Grade-IV posts under Tamil Nadu Government.', tags:['Government','TNPSC','VAO'], band:'band-comp' },
+    { id:'ctn4', name:'TNTET (Tamil Nadu TET)', type:'compexam', region:'Tamil Nadu', duration:'2.5 Hours', desc:'Teacher Eligibility Test for aspirants seeking teaching positions in TN government schools.', tags:['Teaching','Education','Government'], band:'band-comp' },
+    { id:'ctn5', name:'TN Police Constable Exam', type:'compexam', region:'Tamil Nadu', duration:'Written + Physical', desc:'Conducted by TN Uniformed Services Recruitment Board for constable and sub-inspector posts.', tags:['Police','Government'], band:'band-comp' },
+  ],
+  "comp-india": [
+    { id:'cin1', name:'UPSC Civil Services (IAS/IPS)', type:'compexam', region:'India', duration:'Multi-stage', desc:'Conducted by UPSC for IAS, IPS, IFS and 24 other central government services.', tags:['IAS','UPSC','Government'], band:'band-comp' },
+    { id:'cin2', name:'SSC CGL', type:'compexam', region:'India', duration:'Multi-stage', desc:'Staff Selection Commission Combined Graduate Level exam for Group B & C posts in central ministries.', tags:['SSC','Government','Graduate'], band:'band-comp' },
+    { id:'cin3', name:'IBPS PO / SBI PO', type:'compexam', region:'India', duration:'Multi-stage', desc:'Probationary Officer recruitment exams for nationalised and State Bank of India.', tags:['Banking','Finance','Government'], band:'band-comp' },
+    { id:'cin4', name:'RRB NTPC / Group D', type:'compexam', region:'India', duration:'Computer-based Test', desc:'Railway Recruitment Board exam for non-technical popular category and group D posts.', tags:['Railway','Government'], band:'band-comp' },
+    { id:'cin5', name:'NDA Exam', type:'compexam', region:'India', duration:'2 Papers', desc:'UPSC NDA exam for admission to Army, Navy, and Air Force wings of National Defence Academy.', tags:['Defence','Military','UPSC'], band:'band-comp' },
+    { id:'cin6', name:'GATE (Engineering)', type:'compexam', region:'India', duration:'3 Hours', desc:'Graduate Aptitude Test in Engineering for M.Tech admissions and PSU recruitment.', tags:['Engineering','Postgraduate','PSU'], band:'band-comp' },
+  ],
+  "entrance-tn": [
+    { id:'etn1', name:'TNEA (Engineering Admissions)', type:'entrance', region:'Tamil Nadu', duration:'Merit-based', desc:'Tamil Nadu Engineering Admissions conducted by Anna University for B.E/B.Tech seats.', tags:['Engineering','Admissions'], band:'band-entrance' },
+    { id:'etn2', name:'TNMGRMU MBBS Admissions', type:'entrance', region:'Tamil Nadu', duration:'NEET-based', desc:'MBBS / BDS admissions to Tamil Nadu government medical colleges via NEET score.', tags:['Medical','MBBS','Admissions'], band:'band-entrance' },
+    { id:'etn3', name:'TNAU Agriculture Admissions', type:'entrance', region:'Tamil Nadu', duration:'Merit-based', desc:'Centralised admission to Tamil Nadu Agricultural University for B.Sc Agriculture and allied courses.', tags:['Agriculture','Admissions'], band:'band-entrance' },
+    { id:'etn4', name:'TN Law Admissions (TANSLAW)', type:'entrance', region:'Tamil Nadu', duration:'Entrance Test', desc:'Tamil Nadu Unified Integrated Law Admissions for LLB/LLM programmes in TN law colleges.', tags:['Law','Admissions'], band:'band-entrance' },
+  ],
+  "entrance-india": [
+    { id:'ein1', name:'JEE Main', type:'entrance', region:'India', duration:'3 Hours', desc:'Joint Entrance Examination Main for admission to NITs, IIITs, CFTIs and other engineering colleges.', tags:['Engineering','JEE','NIT'], band:'band-entrance' },
+    { id:'ein2', name:'JEE Advanced', type:'entrance', region:'India', duration:'3 Hours × 2', desc:'Advanced stage of JEE for IIT admissions. Only top 2.5 lakh JEE Main qualifiers are eligible.', tags:['Engineering','IIT','JEE'], band:'band-entrance' },
+    { id:'ein3', name:'NEET-UG', type:'entrance', region:'India', duration:'3 hrs 20 min', desc:'National Eligibility cum Entrance Test for undergraduate medical (MBBS/BDS/AYUSH) admissions.', tags:['Medical','MBBS','Health'], band:'band-entrance' },
+    { id:'ein4', name:'CAT (MBA)', type:'entrance', region:'India', duration:'2 Hours', desc:'Common Admission Test for IIM and top B-school MBA / PGDM admissions.', tags:['MBA','Management','Business'], band:'band-entrance' },
+    { id:'ein5', name:'CLAT (Law)', type:'entrance', region:'India', duration:'2 Hours', desc:'Common Law Admission Test for National Law Universities across India (LLB & LLM).', tags:['Law','NLU'], band:'band-entrance' },
+    { id:'ein6', name:'NATA (Architecture)', type:'entrance', region:'India', duration:'3 Hours', desc:'National Aptitude Test in Architecture for B.Arch admissions to recognised institutions.', tags:['Architecture','Design','Arts'], band:'band-entrance' },
+    { id:'ein7', name:'CUET-UG', type:'entrance', region:'India', duration:'Varies', desc:'Common University Entrance Test for undergraduate admissions to central universities across India.', tags:['Undergraduate','Central Universities'], band:'band-entrance' },
+  ]
+};
+
+const TYPE_LABEL = { course:'Course', compexam:'Competitive Exam', entrance:'Entrance Exam' };
+const TYPE_BAND  = { course:'band-tn', compexam:'band-comp', entrance:'band-entrance' };
+const TYPE_CLASS = { course:'badge-course', compexam:'badge-compexam', entrance:'badge-entrance' };
+const TYPE_ICON  = { course:'fa-book-open', compexam:'fa-trophy', entrance:'fa-door-open' };
+
+const MODALS = {
+  neet: { name:'NEET-UG 2025', type:'entrance', region:'India', duration:'3 hrs 20 min', desc:'The National Eligibility cum Entrance Test (NEET-UG) is the single national-level entrance exam for undergraduate medical (MBBS, BDS) and AYUSH (BAMS, BHMS, BSMS, BUMS) courses in India. Conducted by NTA, it is mandatory for all students seeking admission to government and private medical colleges in India and abroad.', tags:['Medical','MBBS','BDS','AYUSH','NTA','India'] },
+  jee: { name:'JEE Main & Advanced 2025', type:'entrance', region:'India', duration:'3 Hours per paper', desc:'JEE (Joint Entrance Examination) is a two-stage national-level examination: JEE Main for NITs/IIITs/CFTIs and JEE Advanced exclusively for IIT admissions. JEE Advanced is considered one of the toughest engineering entrance exams in the world. Only top 2.5 lakh JEE Main rank holders qualify for Advanced.', tags:['Engineering','IIT','NIT','IIIT','JEE','Technology'] },
+  upsc: { name:'UPSC Civil Services 2025', type:'compexam', region:'India', duration:'Multi-stage (Prelims → Mains → Interview)', desc:'The Civil Services Examination (CSE) conducted by UPSC is the most prestigious competitive exam in India, selecting candidates for the Indian Administrative Service (IAS), Indian Police Service (IPS), Indian Foreign Service (IFS), and 21 other services. It consists of three stages: Preliminary, Main, and Personality Test (Interview).', tags:['IAS','IPS','UPSC','Government','Civil Service','India'] }
+};
+</script>
+
+<script>
+/* ─── Card Builder ─────────────────────────────────────────── */
+function buildCard(item) {
+  return `
+    <div class="tyf-card" onclick="openItemModal('${item.id}')">
+      <div class="card-header-band ${item.band}"></div>
+      <div class="card-body">
+        <span class="card-type-badge ${TYPE_CLASS[item.type]}">
+          <i class="fa-solid ${TYPE_ICON[item.type]}"></i>
+          ${TYPE_LABEL[item.type]}
+        </span>
+        <h3>${item.name}</h3>
+        <p class="card-desc">${item.desc}</p>
+        <div class="card-meta">
+          <span class="meta-chip"><i class="fa-solid fa-clock"></i> ${item.duration}</span>
+          ${item.tags.slice(0,2).map(t=>`<span class="meta-chip">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-region"><i class="fa-solid fa-map-pin"></i> ${item.region}</span>
+        <button class="card-cta" onclick="event.stopPropagation(); openItemModal('${item.id}')">
+          Details <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>`;
+}
+
+/* ─── Flatten all items ────────────────────────────────────── */
+const ALL_ITEMS = Object.entries(DATA).flatMap(([cat, items]) =>
+  items.map(item => ({ ...item, category: cat }))
+);
+
+function getById(id) { return ALL_ITEMS.find(i => i.id === id); }
+
+/* ─── Render section grids ─────────────────────────────────── */
+function renderAll() {
+  Object.keys(DATA).forEach(cat => {
+    const el = document.getElementById('grid-' + cat);
+    if (el) el.innerHTML = DATA[cat].map(buildCard).join('');
+  });
+}
+
+/* ─── Seven category cards: filters + search ───────────────── */
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const categoryCards = [...document.querySelectorAll('.category-card')];
+const categoryEmpty = document.getElementById('categoryEmpty');
+const tabButtons = [...document.querySelectorAll('.tab-btn')];
+
+function applyCategoryFilter() {
+  const q = searchInput.value.trim().toLowerCase();
+  const activeTab = document.querySelector('.tab-btn.active')?.dataset.tab || 'all';
+  let visible = 0;
+  categoryCards.forEach(card => {
+    const matchesTab = activeTab === 'all' || card.dataset.category === activeTab;
+    const haystack = card.dataset.search.toLowerCase();
+    const matchesSearch = !q || (q.length <= 2 ? new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(haystack) : haystack.includes(q));
+    const show = matchesTab && matchesSearch;
+    card.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  categoryEmpty.style.display = visible ? 'none' : 'flex';
+}
+
+tabButtons.forEach(btn => btn.addEventListener('click', () => {
+  tabButtons.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyCategoryFilter();
+  document.getElementById('categoryCards').scrollIntoView({ behavior:'smooth', block:'start' });
+}));
+
+function doSearch(query) {
+  searchInput.value = query;
+  searchClear.style.display = query ? 'block' : 'none';
+  applyCategoryFilter();
+  document.getElementById('categoryCards').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function clearSearch() {
+  searchInput.value = '';
+  searchClear.style.display = 'none';
+  applyCategoryFilter();
+}
+
+searchInput.addEventListener('input', () => {
+  searchClear.style.display = searchInput.value.trim() ? 'block' : 'none';
+  applyCategoryFilter();
+});
+searchClear.addEventListener('click', clearSearch);
+
+/* ─── State Machine ────────────────────────────────────────── */
+function showState(state) {
+  ['loading','error','empty','results','data'].forEach(s => {
+    const el = document.getElementById('state' + s.charAt(0).toUpperCase() + s.slice(1));
+    if (el) el.style.display = s === state ? (s === 'data' ? 'block' : 'block') : 'none';
+  });
+}
+
+/* ─── Simulate initial load ─────────────────────────────────── */
+function loadData() {
+  showState('data');
+  applyCategoryFilter();
+}
+
+/* ─── Modals ────────────────────────────────────────────────── */
+function openModal(key) {
+  const m = MODALS[key];
+  if (!m) return;
+  document.getElementById('modalContent').innerHTML = `
+    <span class="card-type-badge ${TYPE_CLASS[m.type]} modal-type">
+      <i class="fa-solid ${TYPE_ICON[m.type]}"></i> ${TYPE_LABEL[m.type]}
+    </span>
+    <h2>${m.name}</h2>
+    <div class="modal-chips">
+      <span class="modal-chip"><i class="fa-solid fa-clock"></i> ${m.duration}</span>
+      <span class="modal-chip"><i class="fa-solid fa-map-pin"></i> ${m.region}</span>
+    </div>
+    <p>${m.desc}</p>
+    <div class="modal-chips">${m.tags.map(t=>`<span class="modal-chip">${t}</span>`).join('')}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openItemModal(id) {
+  const item = getById(id);
+  if (!item) return;
+  document.getElementById('modalContent').innerHTML = `
+    <span class="card-type-badge ${TYPE_CLASS[item.type]} modal-type">
+      <i class="fa-solid ${TYPE_ICON[item.type]}"></i> ${TYPE_LABEL[item.type]}
+    </span>
+    <h2>${item.name}</h2>
+    <div class="modal-chips">
+      <span class="modal-chip"><i class="fa-solid fa-clock"></i> ${item.duration}</span>
+      <span class="modal-chip"><i class="fa-solid fa-map-pin"></i> ${item.region}</span>
+    </div>
+    <p>${item.desc}</p>
+    <div class="modal-chips">${item.tags.map(t=>`<span class="modal-chip">${t}</span>`).join('')}</div>
+    <button class="btn btn-primary" style="margin-top:16px; font-size:0.85rem; padding:10px 22px;">
+      <i class="fa-solid fa-external-link-alt"></i> Learn More
+    </button>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+/* ─── Particle Backgrounds ──────────────────────────────────── */
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 5 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      bottom:${Math.random()*20}%;
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:${Math.random()*10}s;
+      opacity:${Math.random()*0.5+0.1};
+    `;
+    container.appendChild(p);
+  }
+})();
+
+/* ─── Boot ──────────────────────────────────────────────────── */
+loadData();
+</script>
+
+
+</body></html>

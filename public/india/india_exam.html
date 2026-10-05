@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>India Government Exam Search</title>
+
+    <!-- React -->
+    <script
+        crossorigin
+        src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+        crossorigin
+        src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- Babel converts React JSX -->
+    <script
+        src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1e293b;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1d4ed8
+            );
+
+            color: white;
+            padding: 30px 20px;
+        }
+
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        .logo h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+
+        .logo p {
+            color: #dbeafe;
+            font-size: 16px;
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .search-container {
+            display: flex;
+            max-width: 850px;
+            margin: auto;
+        }
+
+
+        .search-container input {
+            flex: 1;
+
+            padding: 16px;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 16px;
+
+            border-radius: 10px 0 0 10px;
+        }
+
+
+        .search-container button {
+            padding: 16px 30px;
+
+            border: none;
+
+            background: #f59e0b;
+
+            color: #1e293b;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            border-radius: 0 10px 10px 0;
+        }
+
+
+        .search-container button:hover {
+            background: #fbbf24;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+
+        .welcome p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+
+        /* ================= FILTERS ================= */
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .filters select {
+            flex: 1;
+
+            min-width: 200px;
+
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            background: white;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        /* ================= RESULT COUNT ================= */
+
+        .result-count {
+            margin-bottom: 20px;
+
+            font-weight: bold;
+
+            color: #475569;
+        }
+
+
+        /* ================= CARDS ================= */
+
+        .results {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(320px, 1fr)
+                );
+
+            gap: 22px;
+        }
+
+
+        .card {
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 24px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.08);
+
+            transition: 0.2s;
+        }
+
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        .badge {
+            display: inline-block;
+
+            background: #dbeafe;
+
+            color: #1d4ed8;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 14px;
+        }
+
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+
+        .info-box {
+            margin-top: 15px;
+        }
+
+
+        .label {
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #334155;
+        }
+
+
+        .age {
+            background: #fff7ed;
+
+            color: #c2410c;
+
+            padding: 11px;
+
+            border-radius: 8px;
+        }
+
+
+        .qualification {
+            background: #ecfdf5;
+
+            color: #047857;
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            line-height: 1.5;
+        }
+
+
+        .official-link {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 11px 16px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .official-link:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* ================= NO RESULTS ================= */
+
+        .no-results {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            background: white;
+
+            padding: 50px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* ================= INFORMATION SECTIONS ================= */
+
+        .section {
+            margin-top: 45px;
+
+            background: white;
+
+            padding: 28px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+
+        .section p {
+            color: #475569;
+            line-height: 1.7;
+        }
+
+
+        .age-relaxation {
+            background: #eff6ff;
+
+            border-left: 5px solid #2563eb;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            line-height: 1.7;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 50px;
+
+            background: #0f172a;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+
+        footer p {
+            max-width: 900px;
+
+            margin: 0 auto 10px;
+
+            color: #cbd5e1;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 650px) {
+
+            .logo h1 {
+                font-size: 25px;
+            }
+
+
+            .search-container {
+                flex-direction: column;
+            }
+
+
+            .search-container input {
+                border-radius: 10px;
+            }
+
+
+            .search-container button {
+                margin-top: 10px;
+
+                border-radius: 10px;
+            }
+
+
+            .filters {
+                flex-direction: column;
+            }
+
+
+            .filters select {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+
+        /* ============================================
+           INDIA GOVERNMENT EXAM DATA
+           Based on uploaded PDF
+        ============================================ */
+
+        const examData = [
+
+            /* ============ UPSC ============ */
+
+            {
+                id: 1,
+                category: "UPSC",
+                title: "UPSC Civil Services",
+                age: "21–32 years",
+                qualification: "Bachelor's degree",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 2,
+                category: "UPSC",
+                title: "UPSC IFoS",
+                age: "21–32 years",
+                qualification:
+                    "Degree with specified science, agriculture or forestry subjects, or engineering",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 3,
+                category: "UPSC",
+                title: "UPSC NDA/NA",
+                age:
+                    "About 16.5–19.5 years; exact DOB window in notification",
+                qualification:
+                    "Class 12; PCM generally required for Air Force/Naval wings",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 4,
+                category: "UPSC",
+                title: "UPSC CDS",
+                age:
+                    "About 19–25 years; post-specific",
+                qualification:
+                    "Graduation; engineering for some Naval/Air Force entries",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 5,
+                category: "UPSC",
+                title: "UPSC CAPF AC",
+                age: "20–25 years",
+                qualification:
+                    "Bachelor's degree; physical and medical standards",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 6,
+                category: "UPSC",
+                title: "UPSC ESE/IES",
+                age:
+                    "21–30 years, usually",
+                qualification:
+                    "Engineering degree",
+                website: "https://upsc.gov.in"
+            },
+
+            {
+                id: 7,
+                category: "UPSC",
+                title: "UPSC CMS",
+                age:
+                    "32 years maximum",
+                qualification:
+                    "Usually MBBS",
+                website: "https://upsc.gov.in"
+            },
+
+
+            /* ============ SSC ============ */
+
+            {
+                id: 8,
+                category: "SSC",
+                title: "SSC CGL",
+                age:
+                    "18–27 / 30 / 32 years; post-specific",
+                qualification:
+                    "Bachelor's degree",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 9,
+                category: "SSC",
+                title: "SSC CHSL",
+                age:
+                    "18–27 years",
+                qualification:
+                    "Usually Class 12",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 10,
+                category: "SSC",
+                title: "SSC MTS / Havaldar",
+                age:
+                    "18–25 or 18–27 years; post-specific",
+                qualification:
+                    "Class 10",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 11,
+                category: "SSC",
+                title: "SSC GD Constable",
+                age:
+                    "18–23 years",
+                qualification:
+                    "Usually Class 10; physical and medical standards",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 12,
+                category: "SSC",
+                title: "SSC CPO SI",
+                age:
+                    "20–25 years",
+                qualification:
+                    "Usually Bachelor's degree; physical and medical standards",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 13,
+                category: "SSC",
+                title: "SSC JE",
+                age:
+                    "18–30 / 32 years; post-specific",
+                qualification:
+                    "Diploma or degree in relevant engineering discipline",
+                website: "https://ssc.gov.in"
+            },
+
+            {
+                id: 14,
+                category: "SSC",
+                title: "SSC Stenographer",
+                age:
+                    "18–30 years Grade C / 18–27 years Grade D",
+                qualification:
+                    "Usually Class 12 plus skill test",
+                website: "https://ssc.gov.in"
+            },
+
+
+            /* ============ DEFENCE ============ */
+
+            {
+                id: 15,
+                category: "Defence",
+                title: "Army Agniveer",
+                age:
+                    "About 17.5–21 years; notification-specific",
+                qualification:
+                    "Class 8 / 10 / 12 / technical qualification depending on trade",
+                website: "https://joinindianarmy.nic.in"
+            },
+
+            {
+                id: 16,
+                category: "Defence",
+                title: "Navy Agniveer SSR/MR",
+                age:
+                    "About 17.5–21 years; notification-specific",
+                qualification:
+                    "Class 12 PCM for SSR; Class 10 for MR",
+                website: "https://joinindiannavy.gov.in"
+            },
+
+            {
+                id: 17,
+                category: "Defence",
+                title: "Air Force Agniveer Vayu",
+                age:
+                    "About 17.5–21 years; notification-specific",
+                qualification:
+                    "Class 12 or diploma depending on science or non-science stream",
+                website: "https://agnipathvayu.cdac.in"
+            },
+
+            {
+                id: 18,
+                category: "Defence",
+                title: "Coast Guard Navik/Yantrik",
+                age:
+                    "About 18–22 years; notification-specific",
+                qualification:
+                    "Class 12 for Navik; diploma for Yantrik",
+                website: "https://joinindiancoastguard.cdac.in"
+            },
+
+
+            /* ============ RAILWAY ============ */
+
+            {
+                id: 19,
+                category: "Railway",
+                title: "RRB NTPC",
+                age:
+                    "18–30 / 33 years; post-specific",
+                qualification:
+                    "Class 12 or graduation depending on post",
+                website:
+                    "https://rrb.indianrailways.gov.in"
+            },
+
+            {
+                id: 20,
+                category: "Railway",
+                title: "RRB Group D / Level 1",
+                age:
+                    "18–33 years",
+                qualification:
+                    "Usually Class 10 or ITI/NAC, as specified",
+                website:
+                    "https://rrb.indianrailways.gov.in"
+            },
+
+            {
+                id: 21,
+                category: "Railway",
+                title: "RRB ALP / Technician",
+                age:
+                    "18–30 / 33 years; post-specific",
+                qualification:
+                    "ITI / diploma / engineering depending on post",
+                website:
+                    "https://rrb.indianrailways.gov.in"
+            },
+
+            {
+                id: 22,
+                category: "Railway",
+                title: "RRB JE",
+                age:
+                    "18–33 years",
+                qualification:
+                    "Usually diploma or degree in relevant engineering",
+                website:
+                    "https://rrb.indianrailways.gov.in"
+            },
+
+
+            /* ============ BANKING ============ */
+
+            {
+                id: 23,
+                category: "Banking",
+                title: "IBPS PO/MT",
+                age:
+                    "20–30 years",
+                qualification:
+                    "Bachelor's degree",
+                website: "https://www.ibps.in"
+            },
+
+            {
+                id: 24,
+                category: "Banking",
+                title: "IBPS CSA (Clerk)",
+                age:
+                    "20–28 years",
+                qualification:
+                    "Usually Bachelor's degree",
+                website: "https://www.ibps.in"
+            },
+
+            {
+                id: 25,
+                category: "Banking",
+                title: "IBPS RRB Office Assistant",
+                age:
+                    "18–28 years",
+                qualification:
+                    "Bachelor's degree; local-language requirement may apply",
+                website: "https://www.ibps.in"
+            },
+
+            {
+                id: 26,
+                category: "Banking",
+                title: "IBPS RRB Officer Scale I",
+                age:
+                    "18–30 years",
+                qualification:
+                    "Bachelor's degree",
+                website: "https://www.ibps.in"
+            },
+
+            {
+                id: 27,
+                category: "Banking",
+                title: "SBI PO / Junior Associate",
+                age:
+                    "21–30 years / 20–28 years respectively",
+                qualification:
+                    "Graduation",
+                website: "https://sbi.co.in"
+            },
+
+            {
+                id: 28,
+                category: "Banking",
+                title: "RBI Grade B / Assistant",
+                age:
+                    "21–30 years / 20–28 years",
+                qualification:
+                    "Usually graduation; RBI stream-specific marks or subjects may apply",
+                website: "https://www.rbi.org.in"
+            },
+
+
+            /* ============ EDUCATION ============ */
+
+            {
+                id: 29,
+                category: "Education",
+                title: "UGC NET / CSIR NET",
+                age:
+                    "No single job age limit; JRF has an upper age limit",
+                qualification:
+                    "Master's degree with required marks",
+                website: ""
+            },
+
+            {
+                id: 30,
+                category: "Education",
+                title: "CTET / TET",
+                age:
+                    "No single universal age limit; recruitment notice controls",
+                qualification:
+                    "Teacher-training qualification plus Class 12 or graduation as applicable",
+                website: ""
+            },
+
+
+            /* ============ GATE ============ */
+
+            {
+                id: 31,
+                category: "GATE",
+                title: "GATE",
+                age:
+                    "No upper age limit",
+                qualification:
+                    "Engineering, science or technology degree or eligible final-year qualification",
+                website: ""
+            }
+
+        ];
+
+
+        /* ============================================
+           REACT APP
+        ============================================ */
+
+        function App() {
+
+            const [search, setSearch] =
+                useState("");
+
+            const [category, setCategory] =
+                useState("All");
+
+            const [qualificationFilter, setQualificationFilter] =
+                useState("All");
+
+
+            const filteredData =
+                examData.filter((item) => {
+
+                    const text = (
+                        item.title + " " +
+                        item.category + " " +
+                        item.age + " " +
+                        item.qualification
+                    ).toLowerCase();
+
+
+                    const searchMatch =
+                        text.includes(
+                            search.toLowerCase()
+                        );
+
+
+                    const categoryMatch =
+                        category === "All" ||
+                        item.category === category;
+
+
+                    const qualificationText =
+                        item.qualification.toLowerCase();
+
+
+                    let qualificationMatch = true;
+
+
+                    if (qualificationFilter === "10") {
+
+                        qualificationMatch =
+                            qualificationText.includes("class 10") ||
+                            qualificationText.includes("class 8") ||
+                            qualificationText.includes("iti");
+
+                    }
+
+
+                    if (qualificationFilter === "12") {
+
+                        qualificationMatch =
+                            qualificationText.includes("class 12");
+
+                    }
+
+
+                    if (qualificationFilter === "Graduate") {
+
+                        qualificationMatch =
+                            qualificationText.includes("bachelor") ||
+                            qualificationText.includes("graduation") ||
+                            qualificationText.includes("master");
+
+                    }
+
+
+                    if (qualificationFilter === "Engineering") {
+
+                        qualificationMatch =
+                            qualificationText.includes("engineering") ||
+                            qualificationText.includes("diploma");
+
+                    }
+
+
+                    if (qualificationFilter === "Medical") {
+
+                        qualificationMatch =
+                            qualificationText.includes("mbbs");
+
+                    }
+
+
+                    return (
+                        searchMatch &&
+                        categoryMatch &&
+                        qualificationMatch
+                    );
+
+                });
+
+
+            function handleSearch() {
+
+                document
+                    .getElementById("results")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+
+
+            return (
+
+                <div>
+
+                    <header>
+
+                        <div className="header-container">
+
+                            <div className="logo">
+
+                                <h1>
+                                    India Government Exam Search
+                                </h1>
+
+                                <p>
+                                    Search Age Limit and Minimum Qualification
+                                </p>
+
+                            </div>
+
+
+                            <div className="search-container">
+
+                                <input
+
+                                    type="text"
+
+                                    placeholder="Search UPSC, SSC, Railway, Banking, NDA, GATE..."
+
+                                    value={search}
+
+                                    onChange={(e) =>
+                                        setSearch(
+                                            e.target.value
+                                        )
+                                    }
+
+                                    onKeyDown={(e) => {
+
+                                        if (e.key === "Enter") {
+                                            handleSearch();
+                                        }
+
+                                    }}
+
+                                />
+
+
+                                <button
+                                    onClick={handleSearch}
+                                >
+                                    Search
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </header>
+
+
+                    <main>
+
+                        <section className="welcome">
+
+                            <h2>
+                                Find Government Exams Across India
+                            </h2>
+
+                            <p>
+                                Search examinations by exam name,
+                                category, age limit and minimum qualification.
+                            </p>
+
+                        </section>
+
+
+                        <div className="filters">
+
+                            <select
+
+                                value={category}
+
+                                onChange={(e) =>
+                                    setCategory(
+                                        e.target.value
+                                    )
+                                }
+
+                            >
+
+                                <option value="All">
+                                    All Categories
+                                </option>
+
+                                <option value="UPSC">
+                                    UPSC
+                                </option>
+
+                                <option value="SSC">
+                                    SSC
+                                </option>
+
+                                <option value="Defence">
+                                    Defence
+                                </option>
+
+                                <option value="Railway">
+                                    Railway
+                                </option>
+
+                                <option value="Banking">
+                                    Banking
+                                </option>
+
+                                <option value="Education">
+                                    Education
+                                </option>
+
+                                <option value="GATE">
+                                    GATE
+                                </option>
+
+                            </select>
+
+
+                            <select
+
+                                value={qualificationFilter}
+
+                                onChange={(e) =>
+                                    setQualificationFilter(
+                                        e.target.value
+                                    )
+                                }
+
+                            >
+
+                                <option value="All">
+                                    All Qualifications
+                                </option>
+
+                                <option value="10">
+                                    Class 10 / ITI
+                                </option>
+
+                                <option value="12">
+                                    Class 12
+                                </option>
+
+                                <option value="Graduate">
+                                    Graduation / Master's
+                                </option>
+
+                                <option value="Engineering">
+                                    Diploma / Engineering
+                                </option>
+
+                                <option value="Medical">
+                                    Medical / MBBS
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div
+                            id="results"
+                            className="result-count"
+                        >
+
+                            Showing {filteredData.length} result(s)
+
+                        </div>
+
+
+                        <div className="results">
+
+                            {
+                                filteredData.length === 0
+
+                                ?
+
+                                <div className="no-results">
+
+                                    <h2>
+                                        No Exams Found
+                                    </h2>
+
+                                    <p>
+                                        Try searching UPSC, SSC, Railway,
+                                        Banking, Defence, Class 12,
+                                        Graduation or Engineering.
+                                    </p>
+
+                                </div>
+
+                                :
+
+                                filteredData.map((item) => (
+
+                                    <div
+                                        className="card"
+                                        key={item.id}
+                                    >
+
+                                        <div className="badge">
+
+                                            {item.category}
+
+                                        </div>
+
+
+                                        <h3>
+
+                                            {item.title}
+
+                                        </h3>
+
+
+                                        <div className="info-box">
+
+                                            <div className="label">
+
+                                                Typical Age Limit (UR)
+
+                                            </div>
+
+
+                                            <div className="age">
+
+                                                {item.age}
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div className="info-box">
+
+                                            <div className="label">
+
+                                                Minimum Qualification
+
+                                            </div>
+
+
+                                            <div className="qualification">
+
+                                                {item.qualification}
+
+                                            </div>
+
+                                        </div>
+
+
+                                        {
+                                            item.website !== ""
+
+                                            &&
+
+                                            <a
+
+                                                href={item.website}
+
+                                                target="_blank"
+
+                                                rel="noopener noreferrer"
+
+                                                className="official-link"
+
+                                            >
+
+                                                Official Website
+
+                                            </a>
+
+                                        }
+
+                                    </div>
+
+                                ))
+                            }
+
+                        </div>
+
+
+                        <section className="section">
+
+                            <h2>
+                                Common Age Relaxation
+                            </h2>
+
+
+                            <div className="age-relaxation">
+
+                                For many central government recruitments,
+                                SC/ST candidates commonly receive
+                                5 years of upper-age relaxation and
+                                OBC-NCL candidates commonly receive
+                                3 years. PwBD, ex-servicemen and other
+                                relaxations vary by examination and post.
+                                Some defence examinations have separate rules.
+
+                            </div>
+
+                        </section>
+
+
+                        <section className="section">
+
+                            <h2>
+                                Important Notice
+                            </h2>
+
+
+                            <p>
+
+                                This website is a planning guide.
+                                Age ranges and qualifications shown here
+                                are typical and are not guarantees.
+
+                                Always check the current official
+                                notification for the exact cut-off date,
+                                date-of-birth window, marks, subjects,
+                                nationality requirements, physical standards,
+                                reservation relaxation and other eligibility rules.
+
+                            </p>
+
+                        </section>
+
+
+                        <section className="section">
+
+                            <h2>
+                                Quick Qualification Guide
+                            </h2>
+
+
+                            <div className="info-box">
+
+                                <div className="label">
+                                    Class 10
+                                </div>
+
+                                <div className="qualification">
+                                    SSC MTS, SSC GD, RRB Group D
+                                    and selected defence recruitment.
+                                </div>
+
+                            </div>
+
+
+                            <div className="info-box">
+
+                                <div className="label">
+                                    Class 12
+                                </div>
+
+                                <div className="qualification">
+                                    SSC CHSL, NDA/NA and selected
+                                    defence or railway posts.
+                                </div>
+
+                            </div>
+
+
+                            <div className="info-box">
+
+                                <div className="label">
+                                    Graduation
+                                </div>
+
+                                <div className="qualification">
+                                    UPSC Civil Services, SSC CGL,
+                                    CDS, Banking and many other
+                                    government examinations.
+                                </div>
+
+                            </div>
+
+
+                            <div className="info-box">
+
+                                <div className="label">
+                                    Engineering / Diploma
+                                </div>
+
+                                <div className="qualification">
+                                    UPSC ESE/IES, SSC JE,
+                                    RRB JE, ALP/Technician and GATE.
+                                </div>
+
+                            </div>
+
+
+                            <div className="info-box">
+
+                                <div className="label">
+                                    Medical
+                                </div>
+
+                                <div className="qualification">
+                                    UPSC CMS generally requires
+                                    an MBBS qualification.
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                    </main>
+
+
+                    <footer>
+
+                        <p>
+
+                            India Government Exam Search
+
+                        </p>
+
+
+                        <p>
+
+                            Always verify eligibility through
+                            the latest official notification
+                            before applying.
+
+                        </p>
+
+                    </footer>
+
+                </div>
+
+            );
+
+        }
+
+
+        /* ============================================
+           RENDER REACT
+        ============================================ */
+
+        const root =
+            ReactDOM.createRoot(
+                document.getElementById("root")
+            );
+
+
+        root.render(
+            <App />
+        );
+
+    </script>
+
+</body>
+</html>

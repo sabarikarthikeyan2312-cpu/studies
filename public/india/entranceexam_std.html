@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All-India Entrance Exam Search</title>
+
+<!-- React -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    color: white;
+    padding: 30px 20px;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.logo p {
+    color: #dbeafe;
+}
+
+.search-container {
+    display: flex;
+    max-width: 850px;
+    margin: auto;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+}
+
+.search-container button {
+    padding: 16px 30px;
+    border: none;
+    background: #f59e0b;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 10px 10px 0;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.welcome {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.welcome h2 {
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #64748b;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.filters select {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.result-count {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin-bottom: 12px;
+}
+
+.description {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.label {
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 7px;
+}
+
+.course {
+    background: #ecfdf5;
+    color: #047857;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.institution {
+    background: #eff6ff;
+    color: #1e40af;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.official-link {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 15px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    background: white;
+    text-align: center;
+    padding: 40px;
+    border-radius: 12px;
+}
+
+.section {
+    margin-top: 45px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+}
+
+.roadmap-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.roadmap-item:last-child {
+    border-bottom: none;
+}
+
+.roadmap-item strong {
+    color: #1d4ed8;
+}
+
+footer {
+    margin-top: 50px;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+footer p {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 650px) {
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-container input {
+        border-radius: 10px;
+    }
+
+    .search-container button {
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .logo h1 {
+        font-size: 25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script>
+
+const e = React.createElement;
+const useState = React.useState;
+
+const examData = [
+
+{
+id: 1,
+level: "After Class 12",
+category: "Engineering",
+title: "JEE Main",
+course: "B.E./B.Tech, B.Arch and B.Planning",
+institution: "NITs, IIITs and participating institutes",
+website: "https://jeemain.nta.nic.in"
+},
+
+{
+id: 2,
+level: "After Class 12",
+category: "Engineering",
+title: "JEE Advanced",
+course: "Engineering and related undergraduate programmes",
+institution: "Indian Institutes of Technology",
+website: "https://jeeadv.ac.in"
+},
+
+{
+id: 3,
+level: "After Class 12",
+category: "Medical",
+title: "NEET UG",
+course: "MBBS, BDS, AYUSH and medical programmes",
+institution: "Medical colleges across India",
+website: "https://neet.nta.nic.in"
+},
+
+{
+id: 4,
+level: "After Class 12",
+category: "General UG",
+title: "CUET UG",
+course: "BA, BSc, BCom and other undergraduate courses",
+institution: "Central and participating universities",
+website: "https://cuet.nta.nic.in"
+},
+
+{
+id: 5,
+level: "After Class 12",
+category: "Law",
+title: "CLAT UG",
+course: "5-year integrated law programmes",
+institution: "National Law Universities",
+website: "https://consortiumofnlus.ac.in"
+},
+
+{
+id: 6,
+level: "After Class 12",
+category: "Law",
+title: "AILET",
+course: "BA LLB",
+institution: "National Law University Delhi",
+website: ""
+},
+
+{
+id: 7,
+level: "After Class 12",
+category: "Design",
+title: "NIFT Entrance",
+course: "Fashion design, technology and management",
+institution: "NIFT campuses",
+website: "https://nift.ac.in"
+},
+
+{
+id: 8,
+level: "After Class 12",
+category: "Design",
+title: "NID DAT",
+course: "Bachelor of Design",
+institution: "National Institute of Design",
+website: "https://admissions.nid.edu"
+},
+
+{
+id: 9,
+level: "After Class 12",
+category: "Design",
+title: "UCEED",
+course: "Bachelor of Design",
+institution: "IITs and participating institutes",
+website: ""
+},
+
+{
+id: 10,
+level: "After Class 12",
+category: "Architecture",
+title: "NATA",
+course: "Bachelor of Architecture",
+institution: "Architecture colleges",
+website: ""
+},
+
+{
+id: 11,
+level: "After Class 12",
+category: "Science",
+title: "IISER IAT",
+course: "BS-MS and science programmes",
+institution: "Indian Institutes of Science Education and Research",
+website: ""
+},
+
+{
+id: 12,
+level: "After Class 12",
+category: "Science",
+title: "NEST",
+course: "Integrated MSc in basic sciences",
+institution: "NISER and CEBS",
+website: ""
+},
+
+{
+id: 13,
+level: "After Class 12",
+category: "Agriculture",
+title: "ICAR AIEEA UG",
+course: "Agriculture and allied sciences",
+institution: "Agricultural universities",
+website: ""
+},
+
+{
+id: 14,
+level: "After Class 12",
+category: "Teaching",
+title: "NCET",
+course: "Integrated Teacher Education Programme",
+institution: "Selected institutions",
+website: ""
+},
+
+{
+id: 15,
+level: "After Class 12",
+category: "Defence",
+title: "NDA and NA",
+course: "Defence officer training",
+institution: "National Defence Academy and Naval Academy",
+website: ""
+},
+
+{
+id: 16,
+level: "After Graduation",
+category: "General PG",
+title: "CUET PG",
+course: "MA, MSc, MCom and other postgraduate courses",
+institution: "Central and participating universities",
+website: "https://cuet.nta.nic.in"
+},
+
+{
+id: 17,
+level: "After Graduation",
+category: "Engineering",
+title: "GATE",
+course: "M.Tech, ME, research and some PSU recruitment",
+institution: "IITs, IISc and other institutes",
+website: ""
+},
+
+{
+id: 18,
+level: "After Graduation",
+category: "MBA",
+title: "CAT",
+course: "MBA and PGDM",
+institution: "IIMs and business schools",
+website: "https://iimcat.ac.in"
+},
+
+{
+id: 19,
+level: "After Graduation",
+category: "MBA",
+title: "XAT",
+course: "MBA and PGDM",
+institution: "XLRI and participating institutes",
+website: ""
+},
+
+{
+id: 20,
+level: "After Graduation",
+category: "MBA",
+title: "CMAT",
+course: "MBA and PGDM",
+institution: "Participating management institutes",
+website: ""
+},
+
+{
+id: 21,
+level: "After Graduation",
+category: "MBA",
+title: "MAT",
+course: "MBA and PGDM",
+institution: "Participating colleges",
+website: ""
+},
+
+{
+id: 22,
+level: "After Graduation",
+category: "Law",
+title: "CLAT PG",
+course: "LLM",
+institution: "National Law Universities",
+website: "https://consortiumofnlus.ac.in"
+},
+
+{
+id: 23,
+level: "After Graduation",
+category: "Research",
+title: "UGC NET",
+course: "JRF, Assistant Professor and research eligibility",
+institution: "Universities and colleges",
+website: "https://ugcnet.nta.nic.in"
+},
+
+{
+id: 24,
+level: "After Graduation",
+category: "Research",
+title: "CSIR UGC NET",
+course: "JRF and research eligibility",
+institution: "Science disciplines",
+website: ""
+},
+
+{
+id: 25,
+level: "After Graduation",
+category: "Science",
+title: "JAM",
+course: "MSc and MSc-PhD programmes",
+institution: "IITs and participating institutes",
+website: ""
+},
+
+{
+id: 26,
+level: "After Graduation",
+category: "Agriculture",
+title: "ICAR AIEEA PG",
+course: "Postgraduate agriculture programmes",
+institution: "Agricultural universities",
+website: ""
+},
+
+{
+id: 27,
+level: "After Graduation",
+category: "Design",
+title: "CEED",
+course: "Master of Design",
+institution: "IITs and participating institutes",
+website: ""
+},
+
+{
+id: 28,
+level: "After Graduation",
+category: "Medical",
+title: "NEET PG",
+course: "MD, MS and PG Diploma",
+institution: "Medical colleges",
+website: ""
+},
+
+{
+id: 29,
+level: "After Graduation",
+category: "Medical",
+title: "NEET MDS",
+course: "Master of Dental Surgery",
+institution: "Dental colleges",
+website: ""
+},
+
+{
+id: 30,
+level: "After Graduation",
+category: "Medical",
+title: "INI-CET",
+course: "Postgraduate medical programmes",
+institution: "Institutes of National Importance",
+website: ""
+}
+
+];
+
+
+function App() {
+
+    const searchState = useState("");
+    const search = searchState[0];
+    const setSearch = searchState[1];
+
+    const levelState = useState("All");
+    const level = levelState[0];
+    const setLevel = levelState[1];
+
+    const categoryState = useState("All");
+    const category = categoryState[0];
+    const setCategory = categoryState[1];
+
+
+    const filteredData = examData.filter(function(item) {
+
+        const text = (
+            item.title + " " +
+            item.level + " " +
+            item.category + " " +
+            item.course + " " +
+            item.institution
+        ).toLowerCase();
+
+        const searchMatch =
+            text.includes(search.toLowerCase());
+
+        const levelMatch =
+            level === "All" ||
+            item.level === level;
+
+        const categoryMatch =
+            category === "All" ||
+            item.category === category;
+
+        return searchMatch && levelMatch && categoryMatch;
+    });
+
+
+    function handleSearch() {
+
+        const results =
+            document.getElementById("results");
+
+        if (results) {
+            results.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    }
+
+
+    const cards = filteredData.length === 0
+
+        ?
+
+        e(
+            "div",
+            { className: "no-results" },
+            e("h2", null, "No Exams Found"),
+            e(
+                "p",
+                null,
+                "Try JEE, NEET, CUET, CAT, GATE, CLAT, MBA or Medical."
+            )
+        )
+
+        :
+
+        filteredData.map(function(item) {
+
+            const children = [
+
+                e(
+                    "div",
+                    {
+                        className: "badge",
+                        key: "badge"
+                    },
+                    item.level
+                ),
+
+                e(
+                    "h3",
+                    {
+                        key: "title"
+                    },
+                    item.title
+                ),
+
+                e(
+                    "p",
+                    {
+                        className: "description",
+                        key: "category"
+                    },
+                    "Category: " + item.category
+                ),
+
+                e(
+                    "div",
+                    {
+                        className: "label",
+                        key: "courseLabel"
+                    },
+                    "Admission / Course"
+                ),
+
+                e(
+                    "div",
+                    {
+                        className: "course",
+                        key: "course"
+                    },
+                    item.course
+                ),
+
+                e(
+                    "div",
+                    {
+                        className: "label",
+                        key: "institutionLabel"
+                    },
+                    "Institutions"
+                ),
+
+                e(
+                    "div",
+                    {
+                        className: "institution",
+                        key: "institution"
+                    },
+                    item.institution
+                )
+            ];
+
+
+            if (item.website !== "") {
+
+                children.push(
+
+                    e(
+                        "a",
+                        {
+                            href: item.website,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            className: "official-link",
+                            key: "website"
+                        },
+                        "Official Website"
+                    )
+
+                );
+            }
+
+
+            return e(
+                "div",
+                {
+                    className: "card",
+                    key: item.id
+                },
+                children
+            );
+
+        });
+
+
+    return e(
+
+        "div",
+
+        null,
+
+
+        e(
+
+            "header",
+
+            null,
+
+            e(
+
+                "div",
+
+                { className: "header-container" },
+
+
+                e(
+
+                    "div",
+
+                    { className: "logo" },
+
+                    e(
+                        "h1",
+                        null,
+                        "All-India Entrance Exam Search"
+                    ),
+
+                    e(
+                        "p",
+                        null,
+                        "Search Higher Studies Entrance Exams After Class 12 and Graduation"
+                    )
+
+                ),
+
+
+                e(
+
+                    "div",
+
+                    { className: "search-container" },
+
+
+                    e(
+                        "input",
+                        {
+                            type: "text",
+                            placeholder: "Search JEE, NEET, CUET, CAT, GATE, CLAT...",
+                            value: search,
+                            onChange: function(event) {
+                                setSearch(event.target.value);
+                            },
+                            onKeyDown: function(event) {
+                                if (event.key === "Enter") {
+                                    handleSearch();
+                                }
+                            }
+                        }
+                    ),
+
+
+                    e(
+                        "button",
+                        {
+                            onClick: handleSearch
+                        },
+                        "Search"
+                    )
+
+                )
+
+            )
+
+        ),
+
+
+        e(
+
+            "main",
+
+            null,
+
+
+            e(
+
+                "section",
+
+                { className: "welcome" },
+
+                e(
+                    "h2",
+                    null,
+                    "Find the Right Entrance Exam"
+                ),
+
+                e(
+                    "p",
+                    null,
+                    "Search national-level higher studies entrance examinations."
+                )
+
+            ),
+
+
+            e(
+
+                "div",
+
+                { className: "filters" },
+
+
+                e(
+
+                    "select",
+
+                    {
+                        value: level,
+                        onChange: function(event) {
+                            setLevel(event.target.value);
+                        }
+                    },
+
+                    e("option", { value: "All" }, "All Education Levels"),
+                    e("option", { value: "After Class 12" }, "After Class 12"),
+                    e("option", { value: "After Graduation" }, "After Graduation")
+
+                ),
+
+
+                e(
+
+                    "select",
+
+                    {
+                        value: category,
+                        onChange: function(event) {
+                            setCategory(event.target.value);
+                        }
+                    },
+
+                    e("option", { value: "All" }, "All Study Areas"),
+                    e("option", { value: "Engineering" }, "Engineering"),
+                    e("option", { value: "Medical" }, "Medical"),
+                    e("option", { value: "General UG" }, "General Undergraduate"),
+                    e("option", { value: "General PG" }, "General Postgraduate"),
+                    e("option", { value: "Law" }, "Law"),
+                    e("option", { value: "Design" }, "Design"),
+                    e("option", { value: "Architecture" }, "Architecture"),
+                    e("option", { value: "Science" }, "Science"),
+                    e("option", { value: "Agriculture" }, "Agriculture"),
+                    e("option", { value: "MBA" }, "MBA / Management"),
+                    e("option", { value: "Research" }, "Research"),
+                    e("option", { value: "Teaching" }, "Teaching"),
+                    e("option", { value: "Defence" }, "Defence")
+
+                )
+
+            ),
+
+
+            e(
+
+                "div",
+
+                {
+                    id: "results",
+                    className: "result-count"
+                },
+
+                "Showing " + filteredData.length + " exam(s)"
+
+            ),
+
+
+            e(
+
+                "div",
+
+                { className: "results" },
+
+                cards
+
+            ),
+
+
+            e(
+
+                "section",
+
+                { className: "section" },
+
+                e(
+                    "h2",
+                    null,
+                    "Exam Selection Guide"
+                ),
+
+                e(
+                    "div",
+                    { className: "roadmap-item" },
+                    e("strong", null, "Engineering: "),
+                    "JEE Main, JEE Advanced and GATE."
+                ),
+
+                e(
+                    "div",
+                    { className: "roadmap-item" },
+                    e("strong", null, "Medical: "),
+                    "NEET UG, NEET PG and INI-CET."
+                ),
+
+                e(
+                    "div",
+                    { className: "roadmap-item" },
+                    e("strong", null, "Law: "),
+                    "CLAT and AILET."
+                ),
+
+                e(
+                    "div",
+                    { className: "roadmap-item" },
+                    e("strong", null, "Management: "),
+                    "CAT, XAT, CMAT and MAT."
+                ),
+
+                e(
+                    "div",
+                    { className: "roadmap-item" },
+                    e("strong", null, "Science and Research: "),
+                    "IISER IAT, NEST, JAM and UGC NET."
+                )
+
+            )
+
+        ),
+
+
+        e(
+
+            "footer",
+
+            null,
+
+            e(
+                "p",
+                null,
+                "All-India Higher Studies Entrance Exam Search"
+            ),
+
+            e(
+                "p",
+                null,
+                "Always verify dates, eligibility and application details on official websites."
+            )
+
+        )
+
+    );
+
+}
+
+
+const rootElement =
+    document.getElementById("root");
+
+
+ReactDOM.createRoot(rootElement).render(
+    e(App)
+);
+
+</script>
+
+</body>
+</html>

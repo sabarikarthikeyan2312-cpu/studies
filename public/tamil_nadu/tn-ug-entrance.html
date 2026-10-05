@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tamil Nadu UG Admissions - Portal Search</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #172033; }
+header { background: #173b67; color: #fff; padding: 28px 20px; text-align: center; }
+header h1 { margin: 0 0 7px; }
+header p { margin: 0; }
+.container { max-width: 1500px; margin: 24px auto; padding: 0 16px; }
+.panel { background: #fff; padding: 18px; border-radius: 12px; box-shadow: 0 3px 12px #00000014; margin-bottom: 18px; }
+.search { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; }
+.filters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; }
+.count { font-weight: 700; margin: 14px 0; }
+.tablewrap { background: #fff; border-radius: 12px; overflow: auto; box-shadow: 0 3px 12px #00000014; }
+table { border-collapse: collapse; width: 100%; min-width: 1000px; }
+th, td { padding: 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+th { background: #173b67; color: #fff; position: sticky; top: 0; }
+tr:hover td { background: #f8fafc; }
+a { color: #173b67; text-decoration: none; font-weight: bold; }
+a:hover { text-decoration: underline; }
+@media(max-width:700px) { .filters { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tamil Nadu UG Admissions</h1>
+  <p>Official Counselling Portals Search — 2026-27</p>
+</header>
+<div class="container">
+  <div class="panel">
+    <input id="q" class="search" placeholder="🔍 Search portal, stream, authority, or course...">
+    <div class="filters">
+      <select id="stream"><option value="">All Streams</option></select>
+      <select id="authority"><option value="">All Authorities</option></select>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Portal Name</th>
+          <th>Stream</th>
+          <th>Authority</th>
+          <th>Courses</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody id="body">
+        <tr>
+          <td><a href="https://www.tneaonline.org/" target="_blank">TNEA (Tamil Nadu Engineering Admissions)</a></td>
+          <td>Engineering</td>
+          <td>Directorate of Technical Education, Anna University</td>
+          <td>B.E., B.Tech, Integrated M.Tech (CSE)</td>
+          <td>Single-window counselling based on Class 12 marks. Registration usually opens in May.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.tngasa.in/" target="_blank">TNGASA (Tamil Nadu Govt Arts & Science Admissions)</a></td>
+          <td>Arts & Science</td>
+          <td>Directorate of Collegiate Education</td>
+          <td>B.A., B.Sc., B.Com., B.Lit. (Tamil)</td>
+          <td>Unified portal for UG seats in govt arts/science colleges. Applications typically open in early May.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.tnmedicalselection.net/" target="_blank">TN Medical Selection</a></td>
+          <td>Medical & Health</td>
+          <td>Directorate of Medical Education & Research</td>
+          <td>MBBS, BDS, AYUSH, Allied Health Sciences</td>
+          <td>NEET-UG based counselling. Registration opens after NEET-UG results, usually late June.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.tndalu.ac.in/" target="_blank">TNDALU (Tamil Nadu Dr. Ambedkar Law University)</a></td>
+          <td>Law</td>
+          <td>State law university, affiliating all TN law colleges</td>
+          <td>B.A. LL.B., B.B.A. LL.B., B.Com. LL.B., LL.B.</td>
+          <td>Admissions to 5-year and 3-year LLB programmes. 5-year applications generally open by April–May.</td>
+        </tr>
+        <tr>
+          <td><a href="https://tnau.ac.in/ugadmission/" target="_blank">TNAU (Tamil Nadu Agricultural University)</a></td>
+          <td>Agriculture</td>
+          <td>Tamil Nadu Agricultural University, Coimbatore</td>
+          <td>B.Sc. (Agriculture), B.Sc. (Horticulture), B.Tech (Food Tech.), B.Sc. (Forestry)</td>
+          <td>UG admissions across constituent and affiliated colleges based on Class 12 marks.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.tanuvas.ac.in/" target="_blank">TANUVAS (Tamil Nadu Veterinary and Animal Sciences University)</a></td>
+          <td>Veterinary & Fisheries</td>
+          <td>Tamil Nadu Veterinary & Animal Sciences University, Chennai</td>
+          <td>B.V.Sc. & A.H., B.F.Sc., B.Tech (Food Tech.)</td>
+          <td>Counselling follows state merit list and reservation rules.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.tnpesu.org/" target="_blank">TNPESU (Tamil Nadu Physical Education and Sports University)</a></td>
+          <td>Sports</td>
+          <td>TN Physical Education & Sports University, Chennai</td>
+          <td>B.P.Ed., B.Sc. (Physical Education), B.Sc. (Yoga)</td>
+          <td>Admission based on merit and sporting record.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  // Get all table rows to filter
+  const allRows = [...document.querySelectorAll("#body tr")];
+  
+  // Get input and dropdown elements
+  const q = document.getElementById("q"), 
+        stream = document.getElementById("stream"), 
+        authority = document.getElementById("authority"), 
+        count = document.getElementById("count");
+
+  // Dynamically populate dropdown options based on table data
+  function addOptions(sel, col) {
+    const vals = [...new Set(allRows.map(r => r.cells[col].innerText.trim()))].sort();
+    vals.forEach(v => sel.add(new Option(v, v)));
+  }
+  
+  // Index 1 corresponds to "Stream", Index 2 corresponds to "Authority"
+  addOptions(stream, 1);
+  addOptions(authority, 2);
+
+  // Search and Filter logic
+  function filter() {
+    let n = 0;
+    let term = q.value.toLowerCase().trim();
+    
+    allRows.forEach(r => {
+      const text = r.innerText.toLowerCase();
+      const streamText = r.cells[1].innerText.trim();
+      const authorityText = r.cells[2].innerText.trim();
+      
+      const ok = (!term || text.includes(term)) && 
+                 (!stream.value || streamText === stream.value) && 
+                 (!authority.value || authorityText === authority.value);
+                 
+      r.style.display = ok ? "" : "none";
+      if (ok) n++;
+    });
+    
+    count.textContent = `Showing ${n} of ${allRows.length} portals`;
+  }
+  
+  // Add event listeners to trigger the filter function on input/change
+  [q, stream, authority].forEach(x => x.addEventListener(x === q ? "input" : "change", filter));
+  
+  // Run once on load to establish the initial count
+  filter();
+</script>
+</body>
+</html>

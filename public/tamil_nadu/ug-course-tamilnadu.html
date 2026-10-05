@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TakeYouForward - Complete Course Search</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#173b67;color:#fff;padding:28px 20px;text-align:center} header h1{margin:0 0 7px} header p{margin:0}
+.container{max-width:1500px;margin:24px auto;padding:0 16px}
+.panel{background:#fff;padding:18px;border-radius:12px;box-shadow:0 3px 12px #00000014;margin-bottom:18px}
+.search{width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:8px;font-size:16px}
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+select{padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff}
+.count{font-weight:700;margin:14px 0}
+.tablewrap{background:#fff;border-radius:12px;overflow:auto;box-shadow:0 3px 12px #00000014}
+table{border-collapse:collapse;width:100%;min-width:1200px} th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+th{background:#173b67;color:#fff;position:sticky;top:0} tr:hover td{background:#f8fafc}
+.empty{text-align:center;padding:30px;font-weight:bold;color:#64748b}
+@media(max-width:700px){.filters{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><h1>TakeYouForward</h1><p>Complete Course Search — Tamil Nadu</p></header>
+<div class="container">
+<div class="panel">
+<input id="q" class="search" placeholder="🔍 Search course, stream, duration, entrance exam, counselling or eligibility...">
+<div class="filters">
+<select id="stream"><option value="">All Streams</option></select>
+<select id="duration"><option value="">All Durations</option></select>
+<select id="exam"><option value="">All Entrance Exams</option></select>
+</div></div>
+<div class="count" id="count"></div>
+<div class="tablewrap"><table><thead><tr>
+<th>Course Name</th><th>Stream</th><th>Duration</th><th>Entrance Exam</th><th>Counselling</th><th>Eligibility</th>
+</tr></thead><tbody id="body"><tr><td><strong>B.Sc. (NURSING)</strong></td><td>Medical Field</td><td>4 years</td><td>NEET-UG / State admission route</td><td>State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.PHARM</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.P.T.</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.ASLP</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. RADIOGRAPHY AND IMAGING TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. RADIO THERAPY TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. CARDIO-PULMONARY PERFUSION TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. MEDICAL LABORATORY TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. OPERATION THEATRE & ANAESTHESIA TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. CARDIAC TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. CRITICAL CARE TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. DIALYSIS TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. PHYSICIAN ASSISTANT</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. ACCIDENT & EMERGENCY CARE TECHNOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. RESPIRATORY THERAPY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.OPTOM</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.O.T</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. NEURO ELECTRO PHYSIOLOGY</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. CLINICAL NUTRITION</strong></td><td>Medical Field</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Agriculture</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Agriculture -Tamil Medium</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Horticulture</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Horticulture -Tamil Medium</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Forestry</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Sericulture</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Food, Nutrition and Dietetics</strong></td><td>Agricultural Science</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Agricultural Engineering)</strong></td><td>Agricultural Science</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Food Technology)</strong></td><td>Agricultural Technology</td><td>4 years</td><td>JEE/State/University route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Biotechnology)</strong></td><td>Agricultural Technology</td><td>4 years</td><td>JEE/State/University route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Energy and Environmental Engineering)</strong></td><td>Agricultural Technology</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. (Hons.) Agri Business Management</strong></td><td>Agricultural Technology</td><td>4 years</td><td>ICAR-UG/CUET-UG / State route</td><td>Agriculture counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Agricultural Information Technology)</strong></td><td>Agricultural Technology</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Tech. (Bioinformatics)</strong></td><td>Agricultural Technology</td><td>4 years</td><td>State/University admission route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E (Mining Engg.)</strong></td><td>Engineering</td><td>4 years</td><td>JEE/State/University route</td><td>State/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E (Marine Engg.).</strong></td><td>Engineering</td><td>4 years</td><td>IMU-CET / relevant route</td><td>IMU counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Artificial Intelligence and Data Science</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Artificial Intelligence and Machine Learning</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer and Communication Engineering</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Business System</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Design</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (AI and Machine Learning)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (Artificial Intelligence and Machine Learning)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (Cyber Security)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (Data Science)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (Internet of Things And Cyber Security Including Block Chain Technology)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Engineering (Internet of Things)</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Science and Technology</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Computer Technology</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Cyber Security</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Information Science and Engineering</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.E / B.Tech - Information Technology</strong></td><td>Engineering</td><td>4 years</td><td>JEE Main / State route</td><td>TNEA / State counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>M.Tech. Computer Science and Engineering (Integrated 5 Years)</strong></td><td>Engineering</td><td>5 years</td><td>Institution-specific</td><td>Institution counselling</td><td>12th / programme-specific</td></tr>
+<tr><td><strong>B.A. Tamil</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. English</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. English Literature</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. History</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Economics</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Political Science</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Public Administration</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Sociology</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Defence Studies</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Defence and Strategic Studies</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Geography</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Psychology</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Journalism and Mass Communication</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Journalism</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Tourism and Travel Management</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Social Work</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Rural Development</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Indian Culture and Tourism</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Criminology and Police Administration</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Philosophy</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Islamic Studies</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. History and Tourism</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Economics with Computer Applications</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Tamil with Computer Applications</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Tamil Literature</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Music</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Fine Arts</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. Communicative English</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Mathematics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Physics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Chemistry</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Computer Science</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Information Technology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Computer Technology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Electronics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Electronics and Communication</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Statistics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Botany</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Zoology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Microbiology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Biotechnology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Biochemistry</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Geology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Geography</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Psychology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Visual Communication</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Nutrition and Dietetics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Home Science</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Plant Biology and Plant Biotechnology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Chemistry with Computer Applications</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Mathematics with Computer Applications</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Physics with Computer Applications</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Data Science</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Artificial Intelligence and Machine Learning</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Cyber Security</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Software Computer Science</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Animation and Visual Effects</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Costume Design and Fashion</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Multimedia</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Bioinformatics</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Medical Laboratory Technology</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Food Science and Nutrition</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Sc. Environmental Science</strong></td><td>Science</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Commerce</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. General</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Computer Applications</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Corporate Secretaryship</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Accounting and Finance</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Banking and Insurance</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Co-operation</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Business Process Services</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Information Systems Management</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. E-Commerce</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. International Business</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Marketing</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Taxation</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Financial Management</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Professional Accounting</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Corporate Accounting</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Com. Computer Applications and Information Technology</strong></td><td>Commerce</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.B.A. Business Administration</strong></td><td>Management</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.B.A. Computer Applications</strong></td><td>Management</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.C.A. Bachelor of Computer Applications</strong></td><td>Computer Applications</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Lit. Tamil</strong></td><td>Arts</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Banking, Financial Services and Insurance</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Software Development</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Retail Management</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Tourism and Hospitality Management</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Food Processing</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Medical Laboratory Technology</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Garment Designing</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.Voc. Multimedia and Animation</strong></td><td>Vocational</td><td>3 years</td><td>Usually merit/admission</td><td>College/University counselling</td><td>12th eligibility as prescribed by the admitting authority</td></tr>
+<tr><td><strong>B.A. LL.B.</strong></td><td>Law</td><td>5 years</td><td>CLAT / AILET / university route</td><td>Law counselling</td><td>12th pass</td></tr>
+<tr><td><strong>B.A. LL.B. (Hons.)</strong></td><td>Law</td><td>5 years</td><td>CLAT / AILET / university route</td><td>Law counselling</td><td>12th pass</td></tr>
+<tr><td><strong>B.B.A. LL.B. (Hons.)</strong></td><td>Law</td><td>5 years</td><td>CLAT / AILET / university route</td><td>Law counselling</td><td>12th pass</td></tr>
+<tr><td><strong>B.Com. LL.B. (Hons.)</strong></td><td>Law</td><td>5 years</td><td>CLAT / AILET / university route</td><td>Law counselling</td><td>12th pass</td></tr>
+<tr><td><strong>B.C.A. LL.B. (Hons.)</strong></td><td>Law</td><td>5 years</td><td>CLAT / AILET / university route</td><td>Law counselling</td><td>12th pass</td></tr></tbody></table></div>
+</div>
+<script>
+const allRows=[...document.querySelectorAll("#body tr")];
+const q=document.getElementById("q"),stream=document.getElementById("stream"),duration=document.getElementById("duration"),exam=document.getElementById("exam"),count=document.getElementById("count");
+function addOptions(sel,col){const vals=[...new Set(allRows.map(r=>r.cells[col].innerText.trim()))].sort();vals.forEach(v=>sel.add(new Option(v,v)))}
+addOptions(stream,1);addOptions(duration,2);addOptions(exam,3);
+function filter(){
+ let n=0, term=q.value.toLowerCase().trim();
+ allRows.forEach(r=>{
+   const text=r.innerText.toLowerCase();
+   const ok=(!term||text.includes(term))&&(!stream.value||r.cells[1].innerText.trim()===stream.value)&&(!duration.value||r.cells[2].innerText.trim()===duration.value)&&(!exam.value||r.cells[3].innerText.trim()===exam.value);
+   r.style.display=ok?"":"none"; if(ok)n++;
+ });
+ count.textContent=`Showing ${n} of ${allRows.length} courses`;
+}
+[q,stream,duration,exam].forEach(x=>x.addEventListener(x===q?"input":"change",filter)); filter();
+</script></body></html>
